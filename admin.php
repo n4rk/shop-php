@@ -56,51 +56,104 @@
 
 			// Gérer les Promos
 			if(isset($_GET['aprm'])) {
-				echo "<div class=\"container\">
-							<div style=\"float:left;margin:30px 0;\">
-								<h3 style=\"font-weight:bold;color:#1C7DCE;border-left:7px solid #1C7DCE;padding-left:20px;\">Les Promotions :</h3>
-							</div>
-							<div style=\"margin:30px 0;float:right;\">
-								<a href=\"admin.php\" class=\"btn btn-info text-white\"><i class=\"fa fa-arrow-left\" style=\"padding-right:10px\"></i> Administration</a>
-							</div>
-
-							<div class=\"allproducts\">
-							<table class=\"table table-bordered\">
-							<thead>
-								<tr class=\"d-flex text-center\">
-									<th class=\"col-2\">Produit</th>
-									<th class=\"col-4\">Libellé</th>
-									<th class=\"col-1\">Promo</th>
-									<th class=\"col-2\">Date Début</th>
-									<th class=\"col-2\">Date Fin</th>
-									<th class=\"col-1\">Ajout</th>
-								</tr>
-							</thead>
-							<tbody>
-						";
-					$req = mysqli_query($cnx,"SELECT * FROM articles ORDER BY idCategorie");
-					$inc = 1;
-					while($articles = $req -> fetch_assoc()) {
-						$req2 = mysqli_query($cnx,"SELECT * FROM promotions WHERE idArticle={$articles['idArticle']} AND NOW() BETWEEN dateDebut AND dateFin");
-						$x = mysqli_num_rows($req2);
-						$promos = mysqli_fetch_assoc($req2);
-						echo "
-							<tr class=\"d-flex text-center\">
-							<form method=post>
-								<td class=\"col-2\"><img src=\"assets/img/vignette/{$articles['vignette']}\" class=\"img-rounded\" width=100></td>
-								<td class=\"col-4\">{$articles['libelle']}</td>
-								<td class=\"col-1\">
-									<input type=number min=0 max=100 class=\"form-control\" "; if($x==1) { echo "value={$promos['tauxPromo']}"; } else echo "value=0"; echo">
-								</td>
-								<td class=\"col-2\"><input type=date name=dateDb "; if($x==1) { echo "value={$promos['dateDebut']}"; } echo" class=\"form-control\"></td>
-								<td class=\"col-2\"><input type=date name=dateFn "; if($x==1) { echo "value={$promos['dateFin']}"; } echo" class=\"form-control\"></td>
-								<td class=\"col-1\"><input type=submit name=\"addpromo\" class=\"btn btn-outline-info\" placeholder=\"Valider\"></td>
-							</form>
-							</tr>
-						";
-						$inc++;
+				if(isset($_GET['addpromo'])) {
+					if(isset($_POST['valid'])) {
+						$promo = $_POST['promo'];
+						$date1 = $_POST['dateDeb'];
+						$date2 = $_POST['dateFin'];
+						$id = $_GET['addpromo'];
+						mysqli_query($cnx,"INSERT INTO promotions(tauxPromo,dateDebut,dateFin,idArticle) VALUES('$promo','$date1','$date2','$id')");
 					}
+					echo "<div class=\"container\">
+								<div style=\"float:left;margin:30px 0;\">
+									<h3 style=\"font-weight:bold;color:#1C7DCE;border-left:7px solid #1C7DCE;padding-left:20px;\">Les Promotions :</h3>
+								</div>
+								<div style=\"margin:30px 0;float:right;\">
+									<a href=\"admin.php\" class=\"btn btn-info text-white\"><i class=\"fa fa-arrow-left\" style=\"padding-right:10px\"></i> Administration</a>
+								</div>
+
+								<div class=\"allproducts\">
+								<table class=\"table table-bordered\">
+								<thead>
+									<tr class=\"text-center\">
+										<th>Produit</th>
+										<th>Libellé</th>
+										<th>Promotion</th>
+										<th>Date Début</th>
+										<th>Date Fin</th>
+										<th>Promotion</th>
+									</tr>
+								</thead>
+								<tbody>
+							";
+						$req = mysqli_query($cnx,"SELECT * FROM articles WHERE idArticle={$_GET['addpromo']}");
+						$inc = 1;
+						while($article = $req -> fetch_assoc()) {
+							$req2 = mysqli_query($cnx,"SELECT * FROM promotions WHERE idArticle={$article['idArticle']} AND NOW() BETWEEN dateDebut AND dateFin");
+							$x = mysqli_num_rows($req2);
+							if($x>0)
+								$promos = mysqli_fetch_assoc($req2);
+							echo "
+								<tr class=\"text-center\">
+									<form method=post>
+										<td><img src=\"assets/img/vignette/{$article['vignette']}\" width=150></td>
+										<td>{$article['libelle']}</td>
+										<td><input type=\"number\" name=\"promo\" min=0 max=100 class=\"form-control\" placeholder=\"Promotion (%)\"";
+										if($x>0) echo" value=\"{$promos['tauxPromo']}\""; echo"></td>
+										<td><input type=\"date\" name=\"dateDeb\" class=\"form-control\"></td>
+										<td><input type=\"date\" name=\"dateFin\" class=\"form-control\"></td>
+										<td><input type=\"submit\" name=\"valid\" class=\"btn btn-outline-info\" placeholder=\"Valider\"></td>
+									</form>
+								</tr>
+							";
+							$inc++;
+						}
 					echo "</tbody></table></div>";
+					/*<td>
+						<input type=number min=0 max=100 class=\"form-control\""; if($x==1) { echo "value={$promos['tauxPromo']}"; } else echo "value=0"; echo">
+					</td>
+					<td><input type=date name=\"dateDb\" "; if($x==1) { echo "value={$promos['dateDebut']}"; } echo" class=\"form-control\"></td>
+					<td><input type=date name=\"dateFn\" "; if($x==1) { echo "value={$promos['dateFin']}"; } echo" class=\"form-control\"></td>
+					*/
+					//$request=mysqli_query($cnx,"INSERT INTO promotions() VALUES ('','','','','','',)")
+				}
+				if(!isset($_GET['addpromo'])) {
+					echo "<div class=\"container\">
+								<div style=\"float:left;margin:30px 0;\">
+									<h3 style=\"font-weight:bold;color:#1C7DCE;border-left:7px solid #1C7DCE;padding-left:20px;\">Les Promotions :</h3>
+								</div>
+								<div style=\"margin:30px 0;float:right;\">
+									<a href=\"admin.php\" class=\"btn btn-info text-white\"><i class=\"fa fa-arrow-left\" style=\"padding-right:10px\"></i> Administration</a>
+								</div>
+
+								<div class=\"allproducts\">
+								<table class=\"table table-bordered\">
+								<thead>
+									<tr class=\"text-center\">
+										<th>Produit</th>
+										<th>Libellé</th>
+										<th>Confirmer Promo</th>
+									</tr>
+								</thead>
+								<tbody>
+							";
+						$req = mysqli_query($cnx,"SELECT * FROM articles ORDER BY idCategorie");
+						$inc = 1;
+						while($articles = $req -> fetch_assoc()) {
+							$req2 = mysqli_query($cnx,"SELECT * FROM promotions WHERE idArticle={$articles['idArticle']} AND NOW() BETWEEN dateDebut AND dateFin");
+							$x = mysqli_num_rows($req2);
+							$promos = mysqli_fetch_assoc($req2);
+							echo "
+								<tr class=\"text-center\">
+									<td><img src=\"assets/img/vignette/{$articles['vignette']}\" width=150></td>
+									<td>{$articles['libelle']}</td>
+									<td><a href=\"?aprm=1&addpromo={$articles['idArticle']}\" class=\"btn btn-outline-info\">Ajouter Promotion<a></td>
+								</tr>
+							";
+							$inc++;
+						}
+					echo "</tbody></table></div>";
+				}
 			}
 
 
