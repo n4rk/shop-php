@@ -1,0 +1,235 @@
+@font-face
+{
+  font-family:'FontAwesome';
+  src:url('../fonts/FontAwesome.otf');
+}
+
+body {
+	font-family: "Hind", "Calibri",sans-serif;
+}
+
+.topbar {
+	height:30px;
+	background-color: #F5F5F5 !important;
+}
+
+.socialMediaLinks {float:left}
+.socialMediaLinks a {
+	padding:12px;
+	color:#444;
+}
+.socialMediaLinks a:hover {
+	color:white;
+	transition: .3s ease;
+}
+.socialMediaLinks .fb:hover {background-color:#4267b2
+}
+.socialMediaLinks .ig:hover {
+	background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+}
+.socialMediaLinks .tw:hover {background-color:#1da1f2
+}
+
+.topbar .topnav a {
+	font-size:12px;
+	color:#444 !important;
+	padding:0 10px;
+}
+.topbar .topnav a:hover {
+	text-decoration: none;
+	color:#1C7DCE !important;
+}
+
+.midbar {
+	background-color:#1C7DCE !important;
+	color:black;
+}
+.midsearch input[type="search"] {border-radius:0 !important
+}
+.dropdown #navbarDropdown {color:white
+}
+.panierBtn {
+	border-radius:0 !important;
+	background-color:#333;
+	font-size:12px;
+	padding:10px 20px !important;
+}
+.midbar form input {
+	font-size: 10px;
+	color:#222;
+}
+
+.botbar {background-color: #333 !important;}
+.botbar ul li {padding:0 10px;}
+.botbar ul li a {
+	color:white !important;
+	padding:0;
+  border-bottom: 2px solid #333;
+}
+.botbar ul li a:hover {border-bottom:1px solid white;}
+
+
+
+.form-elegant .font-small {
+    font-size: 0.8rem;
+}
+
+.form-elegant .z-depth-1a {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+    box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+}
+
+.form-elegant .z-depth-1-half,
+.form-elegant .btn:hover {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+}
+
+.form-elegant .modal-header {
+    border-bottom: none;
+}
+
+.modal-dialog .form-elegant .btn .fab {
+    color: #2196f3!important;
+}
+
+.form-elegant .modal-body, .form-elegant .modal-footer {
+    font-weight: 400;
+}
+
+h2 {
+	font-weight:bold;
+	color:#1C7DCE !important;
+}
+h4 {
+	font-weight:bold;
+	color:#1C7DCE;
+}
+
+thead {
+  background-color: #333 !important;
+  color:white;
+}
+
+
+
+/* Modal images */
+
+.product #myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product #myImg:hover {opacity: 0.7;}
+/* The Modal (background) */
+.product .modal {
+  display: none; Hidden by default
+  position: fixed; Stay in place
+  z-index: 1; Sit on top
+  padding-top: 100px; Location of the box
+  left: 0;
+  top: 0;
+  width: 100%; Full width
+  height: 100%; Full height
+  overflow: auto; Enable scroll if needed
+  background-color: rgb(0,0,0); Fallback color
+  background-color: rgba(0,0,0,0.9); Black w/ opacity
+}
+
+/* Modal Content (Image) */
+.product .modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+.product #caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.product .modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.product .close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.product .close:hover,
+.product .close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mod {
+  padding:30px 50px;
+  border:3px solid #333;
+  color:black;
+  text-decoration:none;
+}
+
+.mod:hover {
+  background-color: #333;
+  color:white;
+  text-decoration:none;
+  transition: .2s ease-in;
+}
+
+
+.pagination div a {
+  padding:10px 20px;
+  margin-left:30px;
+  background-color:#1C7DCE;
+  color:white;
+}
+
+.pagination div a:hover {
+  color:black;
+
+}
+
+.pagination .activePage a {
+   background-color:#333;
+   color:white;
+}
+
+.pagination .activePage a:hover {
+  text-decoration: none;
+  color:white;
+}
+
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .product .modal-content {
+    width: 100%;
+  }
+  .topbar {
+
+  }
+} 
