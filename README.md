@@ -33,5 +33,6 @@ Some normal clients connexion info :
 	Other Clients can be found in table : clients
 
 
-Credits :	twitter.com/aminehcm0
-		github.com/n4rk
+Credits :
+	twitter.com/aminehcm0
+	github.com/n4rk
